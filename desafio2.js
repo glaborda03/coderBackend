@@ -48,7 +48,7 @@ class Contenedor {
       const item = parsedProductos.find((i) => {
         return i.id === Id;
       });
-      console.log(item);
+      return item;
     } catch (error) {
       throw new Error(error);
     }
@@ -99,9 +99,24 @@ class Contenedor {
       throw new Error(error);
     }
   }
-}
 
-const container = new Contenedor("productos");
+  async Random(){
+
+    try{
+    const result = await fs.promises.readFile(
+      `${this.nombreArchivo}.txt`,"utf-8");
+    const Aleatorio = await JSON.parse(result);
+    const RandomProduct = Math.floor(Math.random()*Aleatorio.length);
+
+    
+  }catch(error) {
+    throw new Error(error);
+  }
+ 
+}}
+
+
+//const container = new Contenedor("productos");
 
 //  console.log(
 //    container.save({
@@ -115,3 +130,6 @@ const container = new Contenedor("productos");
 // console.log(container.deleteById(3))
 // console.log(container.getAll())
 // console.log(container.deleteAll())
+//console.log(container.Random())
+
+module.exports = Contenedor
